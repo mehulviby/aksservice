@@ -6,27 +6,28 @@ $ make build
 $ make run
 ```
 
-### Good URL examples
+### Api URL examples
 * AksValidator:
-    * POST localhost:1323/aksvalidator Content-Type:text/plain body:Raw
+    * POST localhost:1323/aksvalidator 
+    * Content-Type:text/plain body:Raw 
     * Valid 1
     ```
-    title: App w/ Invalid maintainer email
-    version: 1.1.0
+    title: Valid App 1
+    version: 0.0.1
     maintainers:
     - name: firstmaintainer app1
-    email: firstmaintainer@asd.com
+      email: firstmaintainer@hotmail.com
     - name: secondmaintainer app1
-    email: secondmaintainer@gmail.com
-    company: Upbound Inc.
-    website: https://upbound.io
-    source: https://github.com/upbound/repo
+      email: secondmaintainer@gmail.com
+    company: Random Inc.
+    website: https://website.com
+    source: https://github.com/random/repo
     license: Apache-2.0
     description: |
-    ### blob of markdown
-    More markdown
+     ### Interesting Title
+     Some application content, and description
     ```
-    *Vaid 2
+    * Valid 2
     ```
     title: Valid App 2
     version: 1.0.1
@@ -40,4 +41,31 @@ $ make run
     description: |
      ### Why app 2 is the best
      Because it simply is...
+    ```  
+    
+ * AksSearch:
+    * POST localhost:1323/aksearch?title=Valid 
+    * Output
+    ```
+[
+    {
+        "Title": "Valid App 1",
+        "Version": "0.0.1",
+        "Maintainers": [
+            {
+                "Name": "firstmaintainer app1",
+                "Email": "firstmaintainer@hotmail.com"
+            },
+            {
+                "Name": "secondmaintainer app1",
+                "Email": "secondmaintainer@gmail.com"
+            }
+        ],
+        "Company": "Random Inc.",
+        "Website": "https://website.com",
+        "Source": "https://github.com/random/repo",
+        "License": "Apache-2.0",
+        "Description": "### Interesting Title\nSome application content, and description"
+    }
+]
     ```  
