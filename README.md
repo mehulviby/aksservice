@@ -4,6 +4,7 @@
 $ cd aksservice
 $ make build
 $ make run
+$ make test // to test source code
 ```
 
 ### Api URL examples

@@ -104,9 +104,13 @@ pack:
 	@echo ">> packing all binaries"
 	@upx -7 -qq bin/*
 
-## Compress all binaries
+## Run current service
 run:
 	./bin/aksservice
+
+## Test complete source code
+test:
+	$(GO) test ./...
 
 #-------------------------
 # Target: depend

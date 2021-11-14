@@ -61,8 +61,7 @@ func TestAksValidatorError(t *testing.T) {
 	rec = httptest.NewRecorder()
 	err = controller.AksValidator(SetupEcho().NewContext(req, rec))
 	assert.NotNil(t, err)
-	assert.Equal(t, 201, rec.Code)
-
+	assert.NotEqual(t, 201, rec.Code)
 }
 
 func TestAksSearchSuccess(t *testing.T) {
