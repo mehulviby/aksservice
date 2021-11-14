@@ -47,25 +47,25 @@ $ make run
     * POST localhost:1323/aksearch?title=Valid 
     * Output
     ```
-[
-    {
-        "Title": "Valid App 1",
-        "Version": "0.0.1",
-        "Maintainers": [
-            {
-                "Name": "firstmaintainer app1",
-                "Email": "firstmaintainer@hotmail.com"
-            },
-            {
-                "Name": "secondmaintainer app1",
-                "Email": "secondmaintainer@gmail.com"
-            }
-        ],
-        "Company": "Random Inc.",
-        "Website": "https://website.com",
-        "Source": "https://github.com/random/repo",
-        "License": "Apache-2.0",
-        "Description": "### Interesting Title\nSome application content, and description"
-    }
-]
+    [
+        {
+            "Title": "Valid App 1",
+            "Version": "0.0.1",
+            "Maintainers": [
+                {
+                    "Name": "firstmaintainer app1",
+                    "Email": "firstmaintainer@hotmail.com"
+                },
+                {
+                    "Name": "secondmaintainer app1",
+                    "Email": "secondmaintainer@gmail.com"
+                }
+            ],
+            "Company": "Random Inc.",
+            "Website": "https://website.com",
+            "Source": "https://github.com/random/repo",
+            "License": "Apache-2.0",
+            "Description": "### Interesting Title\nSome application content, and description"
+        }
+    ]
     ```  
