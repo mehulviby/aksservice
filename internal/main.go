@@ -16,8 +16,10 @@ func main() {
 	controller := &api.Controller{}
 
 	// Route => handler
-	e.POST("/aksvalidator", controller.AksValidator)
-	e.GET("/akssearch", controller.AksSearch)
+	e.POST("/aksconfig", controller.AddAksConfig)
+	e.GET("/aksconfig", controller.GetAllAksConfig)
+	e.GET("/aksconfig/:title", controller.GetAksConfigByTitle)
+	e.DELETE("/aksconfig", controller.DeleteAllAksConfig)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":1323"))

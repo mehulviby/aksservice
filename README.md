@@ -8,8 +8,8 @@ $ make test // to test source code
 ```
 
 ### Api URL examples
-* AksValidator:
-    * POST localhost:1323/aksvalidator 
+* AksConfig:
+    * POST localhost:1323/aksconfig 
     * Content-Type:text/plain body:Raw 
     * Valid 1
     ```
@@ -44,29 +44,11 @@ $ make test // to test source code
      Because it simply is...
     ```  
     
- * AksSearch:
-    * POST localhost:1323/aksearch?title=Valid 
-    * Output
-    ```
-    [
-        {
-            "Title": "Valid App 1",
-            "Version": "0.0.1",
-            "Maintainers": [
-                {
-                    "Name": "firstmaintainer app1",
-                    "Email": "firstmaintainer@hotmail.com"
-                },
-                {
-                    "Name": "secondmaintainer app1",
-                    "Email": "secondmaintainer@gmail.com"
-                }
-            ],
-            "Company": "Random Inc.",
-            "Website": "https://website.com",
-            "Source": "https://github.com/random/repo",
-            "License": "Apache-2.0",
-            "Description": "### Interesting Title\nSome application content, and description"
-        }
-    ]
-    ```  
+ * AksConfig/:title:
+    * GET by Title localhost:1323/aksconfig/:title 
+
+* AksConfig:
+    * GET All localhost:1323/aksconfig
+
+* AksConfig:
+    * DELETE All localhost:1323/aksconfig

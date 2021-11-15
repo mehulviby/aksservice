@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -14,7 +15,7 @@ type Maintainers struct {
 	Email string `yaml:"email" validate:"required,email"`
 }
 
-type AksConfig struct {
+type Config struct {
 	Title       string        `yaml:"title" validate:"required"`
 	Version     string        `yaml:"version" validate:"required,regularExpression=^[0-9]+.[0-9]+.[0-9]+$"`
 	Maintainers []Maintainers `yaml:"maintainers" validate:"dive,required"`
@@ -27,42 +28,54 @@ type AksConfig struct {
 
 // Controller is a controller for this application.
 type Controller struct {
-	AksConfigList []AksConfig
+	ConfigList []Config
 }
 
-// AksValidator handles incoming validator requests
-func (controller *Controller) AksValidator(ctx echo.Context) error {
+// AddAksConfig handles incoming validator requests
+func (controller *Controller) AddAksConfig(ctx echo.Context) error {
 	body, err := ioutil.ReadAll(ctx.Request().Body)
 	if err != nil {
 		return echo.ErrBadRequest
 	}
-	var aksConfig AksConfig
-	if err := yaml.Unmarshal(body, &aksConfig); err != nil {
+	var Config Config
+	if err := yaml.Unmarshal(body, &Config); err != nil {
 		return err
 	}
-	if err := ctx.Validate(aksConfig); err != nil {
+	if err := ctx.Validate(Config); err != nil {
 		return ctx.JSON(http.StatusBadRequest, err.Error())
 	}
-	controller.AksConfigList = append(controller.AksConfigList, aksConfig)
+	controller.ConfigList = append(controller.ConfigList, Config)
 	return ctx.NoContent(http.StatusCreated)
 }
 
-// AksValidator handles incoming validator requests
-func (controller *Controller) AksSearch(ctx echo.Context) error {
-	title := ctx.FormValue("title")
+// GetAllAksConfig handles incoming validator requests
+func (controller *Controller) GetAllAksConfig(ctx echo.Context) error {
+	return ctx.JSON(http.StatusOK, controller.ConfigList)
+}
+
+// GetAksConfigByTitle handles incoming validator requests
+func (controller *Controller) GetAksConfigByTitle(ctx echo.Context) error {
+	title := ctx.Param("title")
 	if len(title) == 0 {
 		return ctx.JSON(http.StatusBadRequest, "Title cannot be empty")
 	}
 
-	var aksConfigResult []AksConfig
-	for _, val := range controller.AksConfigList {
+	var ConfigResult []Config
+	for _, val := range controller.ConfigList {
 		if strings.Contains(val.Title, title) {
-			aksConfigResult = append(aksConfigResult, val)
+			ConfigResult = append(ConfigResult, val)
 		}
 	}
-	if len(aksConfigResult) == 0 {
+	if len(ConfigResult) == 0 {
 		return ctx.JSON(http.StatusOK, "No AKS config with given title")
 	}
 
-	return ctx.JSON(http.StatusOK, aksConfigResult)
+	return ctx.JSON(http.StatusOK, ConfigResult)
+}
+
+// GetAksConfigByTitle handles incoming validator requests
+func (controller *Controller) DeleteAllAksConfig(ctx echo.Context) error {
+	controller.ConfigList = []Config{}
+	fmt.Println(("testing"))
+	return ctx.NoContent(http.StatusOK)
 }
